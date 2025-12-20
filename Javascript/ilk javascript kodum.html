@@ -1,0 +1,70 @@
+<!DOCTYPE Html>
+<html>
+
+<head>
+    <script>
+
+        function mesajGoster()
+        { 
+            alert(document.getElementById("mesaj").innerHTML) ;     
+        }
+
+        function mesajDegistir() {
+            document.getElementById("mesaj").innerHTML = "<h1> vedat </h1>";
+        }
+
+        function TarihGoster() {
+            document.getElementById("mesaj").innerHTML = "<h1> vedat </h1>";
+        }
+
+        function ZamanGoster() {
+            var zaman = new Date();
+
+            var saat = zaman.getHours();
+            var dakika = zaman.getMinutes();
+            var saniye = zaman.getSeconds();
+
+            if (saat<10) {saat = "0" + saat;}
+            if (dakika < 10) {dakika = "0" + dakika;}
+            if (saniye < 10) {saniye = "0" + saniye;}
+
+            var gecerliSaat = saat + ":" + dakika + ":" + saniye;
+
+            document.getElementById("zaman").innerHTML = zaman.toLocaleDateString() + " " + gecerliSaat ;
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+    
+    <p id="zaman"></p>
+    <script>
+        setInterval(ZamanGoster, 1000);
+        ZamanGoster();
+    </script>
+
+    <script>
+        document.write('Merhaba Dünya');
+        document.write('<p>paragraf metni</p>');
+        document.write('<h1>Başlık</h1>');
+    </script>
+
+    <hr />
+
+    <input type="button" value="Tıkla" onclick="javascript:alert('Merhaba Javascript')" />
+
+    <input type="button" value="Paragrafı Oku" onclick="javascript:mesajGoster();" />
+
+    <input type="button" value="Paragraf Değerini Değiştir" onclick="javascript:mesajDegistir();" />
+
+    <hr />
+
+    <p id="mesaj">cccccc</p>
+
+
+
+</body>
+</html>
