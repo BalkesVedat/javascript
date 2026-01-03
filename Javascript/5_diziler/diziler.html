@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Diziler (Arrays)</title>
+</head>
+<body>
+
+
+
+    <script type="text/javascript">
+        //Dizi (Array) içerisinde aynı tipten birden fazla değer taşıyan değişkenlerdir. Diziler içerisindek değerler girdiğimiz sırayla tutulurlar ve 0 dan başlayan sıra numaralarına sahiptirler. Buna verinin index numarası denir. Bir dizi için en büyük index numarası dizideki eleman sayısının 1 eksiği kadardır. Çünkü numaralandırma 0 dan başlar.
+
+        // Dizi tanımlama yöntemleri
+        //1. doğrudan veri atayarak tanımlama.
+        let tekDegerliDegisken = "JavaScript";
+
+        // 3 elemanlı string değer tutan dizi
+        let diller = ["JavaScript", "Phyton", "C#"]; // değerleri [] içerisinde belirtiyoruz. 
+
+        document.write("Dizi adı: diller <br />");
+        document.write("Eleman Sayısı:" + diller.length + "<br />");
+        document.write("İçindeki değerler:" + diller.toString());
+
+        document.write("<br /> ----------------- <br />");
+
+        //2. önce tanımlayıp sonra değer atama.
+        let ogrenciler = []; // değer atamasak bile bu tanımlanan değişkenin dizi olduğunu belirtmek için [] yazıyoruz. Sonrasında kullanırken dizi değişkeni olarak verdiğimiz ismin yanın da [] içerisinde hangi sıradaki elemanı tanımlıyor ya da kullıyor isek, ilgili elemanın sıra numarasını (index) [] içerisinde belirtiyoruz.
+
+        ogrenciler[0] = "Ahmet";
+        ogrenciler[1] = "Mehmet";
+        ogrenciler[2] = "Ayşe";
+        ogrenciler[3] = "Fatma";
+        ogrenciler[4] = "Zeynep";
+        // burada 4 elemanlı bir dizi oluşturduk.
+
+        document.write(ogrenciler[2]+"<br/>");
+        document.write("Öğrenci Listesi: <br/>");
+
+        for (var eleman in ogrenciler) {
+            document.write(ogrenciler[eleman] + "<br/>");
+        }
+
+        document.write("<br /> ----------------- <br />");
+
+        //3. new keywordü ile Array nesnesini kullanarak yaratma
+        //javascriptin object oriented olarak kullanımı
+
+        var dersler = new Array(6);
+        dersler = ["Matematik","Türkçe","İngilizce","Fen","Coğrafya","Tarih"];
+
+        //bata tanımlanan eleman sayısının üzerinde eleman eklendiğinde yeni eklenen elemanlar için dizinin boyutu otomatik olarak büyütülür. Hata vermez.
+        dersler[6] = "Biyoloji";
+        dersler[7] = "Kimya";
+
+        document.write("Ders Listesi: <br/>");
+        document.write("Eleman Sayısı: " + dersler.length +"<br/>");
+        for (var eleman in dersler) {
+            document.write(dersler[eleman] + "<br/>");
+        }
+
+        document.write("<br /> ----------------- <br />");
+        document.write("Dizi İşlemleri: <br/>");
+        document.write("değer atama: <br/>");
+
+        //var degisken = diziAd[index];
+        // diziAd[index] = değer;
+
+        ogrenciler[0] = "Vedat";
+
+        document.write("<br /> ----------------- <br />");
+        document.write("diziyi sıralama: <br/>");
+
+        ogrenciler.sort();
+        document.write("Öğrenci Listesi: <br/>");
+
+        for (var eleman in ogrenciler) {
+            document.write(ogrenciler[eleman] + "<br/>");
+        }
+
+        document.write("<br /> ----------------- <br />");
+        document.write("diziyi tersine çevirme: <br/>");
+
+        ogrenciler.reverse();
+        document.write("Öğrenci Listesi: <br/>");
+
+        for (var eleman in ogrenciler) {
+            document.write(ogrenciler[eleman] + "<br/>");
+        }
+
+        document.write("<br /> ----------------- <br />");
+        document.write("dizi içinde bir değer arama: <br/>");
+
+        var bulunanSira = ogrenciler.indexOf("Zeynep");
+
+        console.log(bulunanSira);
+
+        if (bulunanSira == (-1)) {
+            ogrenciler[ogrenciler.length] = "Zeynep";
+            document.write("Zeynep diziye eklendi.");   
+        }
+        else {
+            document.write("Zeynep dizide mevcut.");
+        }
+        
+        document.write("Öğrenci Listesi: <br/>");
+
+        for (var eleman in ogrenciler) {
+            document.write(ogrenciler[eleman] + "<br/>");
+        }
+       
+
+
+    </script>
+
+</body>
+</html>

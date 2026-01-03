@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!--<script src="Jquery_Full_371.js" type="text/javascript"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+
+    </script>
+
+    <style>
+
+      /*  #mesaj {
+            font-size:24px;
+            color: red;
+        }*/
+
+        p {
+        }
+
+        table > #satir1 {
+        }
+
+        a {
+            color: red;
+        }
+
+        a:visited {
+            color: blue;
+        }
+
+        a:hover {
+            color: green;
+        }
+    </style>
+
+
+</head>
+<body>
+    <h3 id="baslik">Öğrenci Kayıt Formu</h3>
+
+    <label id="lblAd">Adı:</label>
+    <input type="text" id="txtAd" />
+    <br />
+    <label id="lblSoyAd">Soyadı:</label>
+    <input type="text" id="txtSoyad" />
+    <br />
+    <button id="btnKaydet" onclick="kaydet();"></button>
+    <button id="btnListele" onclick="listele();">LİSTELE</button>
+    <br />
+    <p id="mesaj">ggg</p>
+
+
+    <p> Bu formu kullanarak öğrenci kaydı yapabilirsiniz.</p>
+
+    <p id="OgrList"> </p>
+
+    <!--<script>
+        function MesajGoster() {
+            document.write("sdfsdfsdfdsf");
+        };
+    </script>-->
+    <!--<script>MesajGoster();</script>-->
+
+    <script>
+        /*$(document).ready(function () { });*/
+
+        function listele() {
+            var liste = ["Ali Osman","Veli","Ayşe","Fatma","Kemal"];
+            var icerik = "";
+
+            for (var i = 0; i < liste.length; i++) {
+                icerik += liste[i] + "<br/>";
+            }
+
+            $("#OgrList").html(icerik);
+           // document.getElementById("OgrList").innerHTML = icerik;
+        }
+
+
+        function kaydet() {
+            let ad = $("#txtAd");
+            let soyad = $("#txtSoyad");
+
+            //işlemler
+
+            alert(ad[0].value + " " + soyad[0].value + " veritabanına başarıyla kaydedildi.");
+        }
+
+        $(document).ready(function () {
+            /* alert('Merhaba Dünya!...');*/
+            $("#mesaj").html("Bilgileri Girip KAYDET butonuna basın");
+            // document.getElementById("mesaj").innerHTML = "fdf";
+            $("#btnKaydet").text("KAYDET");
+
+
+            //$("#mesaj").hide();
+
+            //document.getElementById("nesneIDsi");
+            //document.getElementsByName("nesneAdi");
+            //document.getElementsByClassName("classAdi");
+            //document.getElementsByTagName("TAGAdi");
+            //document.querySelector("selectorSorgusu");
+
+            //$("selector")
+
+            document.getElementById("mesaj").style.fontSize = "24px";
+            document.getElementById("mesaj").style.color = "blue";
+            document.getElementById("mesaj").style.display = "none";
+
+            $("#mesaj").css("font-size", "24px");
+            $("#mesaj").css("color", "green");
+            $("#mesaj").css("display", "none");
+
+        });
+
+        /*
+          JQuery, klasik Javascriptin kullanımı kolaylaştırmak için geliştirilmiş açık kaynaklı bir hazır kod kütüphanesidir. JQuery HTML nesne modelinin daha kolay kullanılmasını sağlar. Klasik JS ile yapılan nesne seçimlerini kolaylaştırır. Nesne seçimi $() ifadesi (selector) ile yapılır ve nesneler aynen CSS tanımı yaparken kullanılar QuerySelector mantığıyla bildirilir. Örneğin :
+            $("#id")        --> CSS  #id ,
+            $("p")          --> CSS  p   ,
+            $(".className") --> CSS  .className
+            v.b.
+
+            JQuery de aynı klasik JS gibi Case Sensitive 'dir. Yani Büyük/küçük harf duyarlıdır.
+
+
+
+
+        */
+
+
+
+
+    </script>
+
+</body>
+</html>

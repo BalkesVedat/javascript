@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Objects</title>
+</head>
+<body>
+
+
+
+    <script type="text/javascript">
+        // Object tipi tüm nesne tiplerini kapsayan ana tiptir. kendi özel tiplerimizi class ya da object olarak tanımlayabiliriz.
+        /* Nesne tanımlarken {} işaretleri ile bunun bir Object olduğu bildirilir. Object in alanları ve bu alanlara atanan değerler {} içerisinde bildirilir.
+        Kullanımı :
+        A)
+         const nesneAD = {alan1:değer1,alan2:değer2,...};
+         
+         Eğer alanlara atanan değerler string ise yine '' ya da "" içerisinde girilir.
+
+        B)
+            const nesneAD = {};
+            nesneAD.alan1 = deger1;
+            nesneAD.alan2 = deger2;
+            ...
+
+        C)
+            const nesneAD = new Object(){};
+            nesneAD.alan1 = deger1;
+            nesneAD.alan2 = deger2;
+            ...
+
+            new Object(){}; bildiriminde alanlar ve değerleri {} içerisinde bildirilebileceği gibi
+             alan = değer şeklinde de bildirilebilir.
+
+        */
+        
+
+        var sayi1 = 25;
+        var ogrAd = "Ali";
+        var fiyat = 35.50;
+        var ogrenciler = ["Ayşe", "Fatma", "Muzaffer"];
+        var notlar = [123,321,54,75,0,4566];
+
+        var araba1 = { "Marka": "Mercedes", "Model": "G63", "Plaka": "34GUL34", "Fiyat": 20000000 };
+
+        var araba2 = { "Marka": "BMW", "Model": "i7", "Plaka": "34ALI34", "Fiyat": 10000000 };
+
+
+        var arabalar = [araba1,araba2];
+
+        // new anahtar kelimesi ile bir class belirtmeden nesne yaratılırsa, bu nesnenin tipi object olur. {} işaretleri arasında property ve değerleri, anahtar:değer çiftleri şeklinde yazılır.
+
+        var toplam = araba1.Fiyat + araba2.Fiyat;
+        document.write(toplam + "<br/>"); 
+
+        araba1.Fiyat = 25000000;
+        araba2.Fiyat = 15000000;
+
+        var toplam = araba1.Fiyat + araba2.Fiyat;
+        document.write(toplam + "<br/>");
+
+    var kitaplar = [
+        { "KitapAd": "Çalıkuşu", "YazarAd": "Reşat Nuri" },
+        { "KitapAd": "Savaş ve Barış", "YazarAd": "Tolstoy" },
+        { "KitapAd": "Vadideki Zambak", "YazarAd": "Ali" }
+    ];
+
+        for (var kitap in kitaplar) {
+            document.write("Kitap Adı: " + kitaplar[kitap].KitapAd);
+            document.write(" - ");
+            document.write("Yazar Adı: " + kitaplar[kitap].YazarAd);
+            document.write("<br/>");
+        }
+
+        document.write("<br/> --------------------- <br/>")
+
+        var toplamDeger = 0;
+       /* var aracSayisi = 0;*/
+
+        for (var araba in arabalar) {
+            toplamDeger += arabalar[araba].Fiyat;
+            /*aracSayisi++;*/
+            document.write("Marka: " + arabalar[araba].Marka);
+            document.write(" - ");
+            document.write("Model: " + arabalar[araba].Model);
+            document.write(" - ");
+            document.write("Plaka: " + arabalar[araba].Plaka);
+            document.write(" - ");
+            document.write("Fiyat: " + arabalar[araba].Fiyat);
+            document.write("<br/>");
+        }
+
+     document.write("Toplam Arac Adedi : " + arabalar.length + "<br/>");
+     document.write("Toplam Arac Değeri : " + toplamDeger + "<br/>");
+
+        document.write("<br/>------------------------<br/>");
+
+        var ogrenci = {};
+
+        ogrenci.Numara = 1;
+        ogrenci.Ad = "Ali";
+        ogrenci.Soyad = "Kılıç";
+        ogrenci.dogumYeri = "İzmir";
+        ogrenci.TamAd = ogrenci.Ad + " " + ogrenci.Soyad;
+
+        document.write(ogrenci.TamAd);
+
+        document.write("<br/>------------------------<br/>");
+
+        const Urun = new Object({
+            id: 1,
+            ad: "Çikolata",
+            urunfiyat: 50
+        });
+
+        Urun.kdvDahilFiyat = Urun.urunfiyat * 1.2;
+
+        Urun.SKT = "2026-11-15";
+        document.write(Urun.kdvDahilFiyat);
+        document.write("<br/>------------------------<br/>");
+
+
+
+    </script>
+
+</body>
+</html>

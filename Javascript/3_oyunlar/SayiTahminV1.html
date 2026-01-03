@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>JS ile Sayı Tahmin Oyunu</title>
+    <style type="text/css">
+        #tebrik {
+            color:green;
+        
+        }
+
+        #tekrar {
+            color:red;
+        
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h1>JS ile Sayı Tahmin Oyunu</h1>
+    <p>1 ile 10 arası bir sayı tuttum. Bakalım bulabilecek misin?</p>
+    <input type="number" min="1" max="10" id="tahminRakami"/>
+    <input type="button" onclick="Tahmin()" value="Tahmin Et" />
+    <br />
+    <br />
+    <p id="mesaj"></p>
+
+
+<script type="text/javascript">
+
+    let rastgeleSayi = Math.round(Math.random() * 10 + 1);
+
+    function Tahmin() {
+
+        let girilenSayi = Number(document.getElementById("tahminRakami").value);
+
+        // test amacıyla kullanacağız. gerçek sürümde kaldır.
+       // console.log(rastgeleSayi);
+
+        if (rastgeleSayi == girilenSayi) {
+
+            document.getElementById("mesaj").innerHTML = '<h2 id= "tebrik">Tebrikler Bildiniz!</h2>';
+        }
+        else {
+            document.getElementById("mesaj").innerHTML = '<h2 id= "tekrar">Ne yazık ki bilemediz. Tekrar Deneyiniz.</h2>';
+        }
+
+
+    }
+
+
+</script>
+
+</body>
+</html>

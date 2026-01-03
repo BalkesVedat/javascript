@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>JS ile Sayı Tahmin Oyunu V2</title>
+    <style type="text/css">
+        #tebrik {
+            color:green;
+        
+        }
+
+        #tekrar {
+            color:red;
+        
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h1>JS ile Sayı Tahmin Oyunu 2</h1>
+    <p>1 ile 100 arası bir sayı tuttum. Bakalım bulabilecek misin?</p>
+    <input type="number" min="1" max="100" id="tahminRakami" />
+    <input type="button" onclick="Tahmin()" value="Tahmin Et" />
+    <input type="button" onclick="Resetle()" value="Yeniden Başla" />
+    <br />
+    <label>Kalan Tahmin Hakkı : </label> <span id="Hak">4</span>
+    <br />
+    <br />
+    <p id="mesaj"></p>
+
+
+    <script type="text/javascript">
+
+        let rastgeleSayi;
+        let kalanHak;
+
+        Resetle();
+
+        function Tahmin()
+        {
+            let girilenSayi = Number(document.getElementById("tahminRakami").value);
+
+            // test amacıyla kullanacağız. gerçek sürümde kaldır.
+            // console.log(rastgeleSayi);
+
+            /*console.log(kalanHak);*/
+
+            if (kalanHak == 0) {
+                document.getElementById("mesaj").innerHTML = '<h2 id= "tekrar">Ne yazık ki bilemediz. Lütfen oyunu yeniden başlatınız.</h2>';
+                return;
+            }
+
+
+            if (rastgeleSayi == girilenSayi) {
+                document.getElementById("mesaj").innerHTML = '<h2 id= "tebrik">Tebrikler Bildiniz!</h2>';
+                kalanHak = 0;
+            }
+            else {
+
+                kalanHak--;
+
+               /* console.log(kalanHak);*/
+
+                if (kalanHak == 0) {
+                    document.getElementById("Hak").innerText = "Hiç Hakkınız kalmadı. Lütfen oyunu tekrar başlatın. Tutulan Sayı : " + rastgeleSayi;
+                    return;
+                }
+                else {
+                    document.getElementById("Hak").innerText = kalanHak;
+                }
+
+                if (rastgeleSayi < girilenSayi) {
+                    document.getElementById("mesaj").innerHTML = '<h2 id= "tekrar">Ne yazık ki bilemediz. Daha küçük bir sayı girerek tekrar deneyiniz.</h2>';
+                }
+                else {
+                    document.getElementById("mesaj").innerHTML = '<h2 id= "tekrar">Ne yazık ki bilemediz. Daha büyük bir sayı girerek tekrar deneyiniz.</h2>';
+                }
+            }
+        }
+
+        function Resetle() {
+            rastgeleSayi = Math.round(Math.random() * 100 + 1);
+            document.getElementById("Hak").innerText = 4;
+            kalanHak = parseInt(document.getElementById("Hak").innerText);
+            document.getElementById("tahminRakami").value = "";
+            document.getElementById("mesaj").innerHTML = "";
+        }
+
+    </script>
+
+</body>
+</html>
