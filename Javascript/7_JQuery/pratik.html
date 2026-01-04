@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Pratik Sayfası</title>
+
+    <!-- jQuery CDN (güncel ve yaygın kullanım) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.08);
+        }
+
+        .box {
+            width: 120px;
+            height: 120px;
+            background: #4f46e5;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+            margin-right: 8px;
+        }
+
+            button:disabled {
+                background: #9ca3af;
+                cursor: not-allowed;
+            }
+
+        input {
+            padding: 8px;
+            margin-top: 10px;
+            width: 220px;
+        }
+
+        .highlight {
+            background: #dbeafe;
+            border-left: 5px solid #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>jQuery Pratik Sayfası</h1>
+
+    <!-- 1. Gizle / Göster -->
+    <div class="card">
+        <h3>Gizle / Göster & Animasyon</h3>
+        <button id="btnToggle">Kutuyu Aç/Kapat</button>
+        <div class="box" id="animatedBox"></div>
+    </div>
+
+    <!-- 2. Aktif / Pasif Buton -->
+    <div class="card">
+        <h3>Buton Aktif / Pasif</h3>
+        <button id="btnEnable">Formu Aktif Et</button>
+        <button id="btnSubmit" disabled>Gönder</button>
+    </div>
+
+    <!-- 3. Form Kontrol -->
+    <div class="card">
+        <h3>Basit Form Kontrolü</h3>
+        <input type="text" id="nameInput" placeholder="Adınızı girin">
+        <p id="formMessage"></p>
+    </div>
+
+    <!-- 4. Class Manipülasyonu -->
+    <div class="card" id="cardEffect">
+        <h3>Class Ekle / Kaldır</h3>
+        <button id="btnHighlight">Vurgula</button>
+    </div>
+
+    <!-- JS dosyaları -->
+    <script src="script.js"></script>
+    <!--<script src="jqueryScript.js"></script>-->
+
+</body>
+</html>

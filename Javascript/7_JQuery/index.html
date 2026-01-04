@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive jQuery UI Pratik</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.08);
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+
+            button.secondary {
+                background: #475569;
+            }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1001;
+        }
+
+        /* ACCORDION */
+        .accordion-header {
+            background: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>jQuery UI Pratik Sayfası</h1>
+
+    <div class="container">
+
+        <!-- MODAL -->
+        <div class="card">
+            <h3>Modal Örneği</h3>
+            <button id="openModal">Modal Aç</button>
+        </div>
+
+        <!-- TOAST -->
+        <div class="card">
+            <h3>Toast Bildirim</h3>
+            <button id="showToast">Toast Göster</button>
+        </div>
+
+        <!-- ACCORDION -->
+        <div class="card">
+            <h3>Accordion</h3>
+
+            <div class="accordion-header">Bölüm 1</div>
+            <div class="accordion-content">
+                jQuery ile accordion yapısı.
+            </div>
+
+            <div class="accordion-header">Bölüm 2</div>
+            <div class="accordion-content">
+                Click event + slide animasyonu.
+            </div>
+
+            <div class="accordion-header">Bölüm 3</div>
+            <div class="accordion-content">
+                Responsive uyumlu basit yapı.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <h3>Modal Başlık</h3>
+            <p>Bu bir jQuery modal örneğidir.</p>
+            <button id="closeModal" class="secondary">Kapat</button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        İşlem başarılı
+    </div>
+
+    <script src="index.js"></script>
+
+</body>
+</html>
