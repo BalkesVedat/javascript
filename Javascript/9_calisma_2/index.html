@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vedat Gümüşkuyu - JS Pratik Alanı</title>
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,.06);
+      --text: #e8ecff;
+      --muted: rgba(232,236,255,.70);
+      --border: rgba(232,236,255,.16);
+      --accent: #8a7dff;
+
+      /* Global görünüm kontrolü (tüm sayfa) */
+      --radius: 14px;
+      --spacing: 12px;
+      --fontSize: 16px;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body{
+      margin: 0;
+      background: radial-gradient(1200px 600px at 15% 10%, rgba(138,125,255,.25), transparent 60%),
+                  radial-gradient(900px 500px at 75% 30%, rgba(80, 220, 255, .15), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size: var(--fontSize);
+      line-height: 1.5;
+      padding: 26px 16px 80px;
+    }
+
+    a { color: var(--text); }
+    .container { max-width: 1040px; margin: 0 auto; }
+
+    header{
+      display:flex; gap: 12px; align-items:center; justify-content:space-between;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 14px 16px;
+      position: sticky;
+      top: 10px;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+    }
+
+    .title{
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .title h1{ margin:0; font-size: 18px; }
+    .title p{ margin:0; color: var(--muted); font-size: 13px; }
+
+    .row{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 14px; margin-top: 14px; }
+    @media (max-width: 920px){ .row{ grid-template-columns: 1fr; } }
+
+    .card{
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: calc(var(--spacing) + 8px);
+    }
+
+    .card h2{ margin: 0 0 10px; font-size: 16px; }
+    .muted { color: var(--muted); font-size: 13px; }
+
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 520px){ .grid2{ grid-template-columns: 1fr; } }
+
+    label{ display:block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    input[type="text"], input[type="number"], select{
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline: none;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, select:focus{
+      border-color: rgba(138,125,255,.7);
+      box-shadow: 0 0 0 4px rgba(138,125,255,.15);
+    }
+
+    .btn{
+      appearance: none;
+      border: 1px solid var(--border);
+      background: rgba(138,125,255,.18);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select: none;
+    }
+    .btn:hover{ background: rgba(138,125,255,.28); border-color: rgba(138,125,255,.55); }
+    .btn:active{ transform: translateY(1px); }
+
+    .pill{
+      display:inline-flex; align-items:center; gap: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .divider{ height: 1px; background: var(--border); margin: 12px 0; }
+
+    /* Accordion */
+    .accordion{ display:flex; flex-direction:column; gap: 10px; }
+    .acc-item{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(0,0,0,.18);
+    }
+    .acc-header{
+      padding: 12px 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+    }
+    .acc-header strong{ font-size: 14px; }
+    .chev{ transition: transform .2s ease; opacity: .9; }
+    .acc-item[data-open="true"] .chev{ transform: rotate(180deg); }
+
+    .acc-body{
+      max-height: 0px;
+      overflow: hidden;
+      transition: max-height .25s ease;
+      border-top: 1px solid transparent;
+    }
+    .acc-item[data-open="true"] .acc-body{
+      border-top-color: var(--border);
+    }
+    .acc-content{
+      padding: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .reveal.is-visible{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stickyHint{
+      position: sticky;
+      top: 86px;
+      display:flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      z-index: 3;
+      pointer-events:none;
+    }
+    .scrollBadge{
+      pointer-events:none;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .scrollBadge.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Animasyon demo kutuları */
+    .demoArea{
+      display:flex; flex-wrap: wrap; gap: 10px;
+      align-items:center;
+    }
+    .box{
+      width: 72px; height: 72px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(138,125,255,.18);
+      display:grid; place-items:center;
+      user-select: none;
+    }
+    .pulse{
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{ transform: scale(1); opacity: .9; }
+      50%{ transform: scale(1.06); opacity: 1; }
+      100%{ transform: scale(1); opacity: .9; }
+    }
+
+    .toast{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.55);
+      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      max-width: min(420px, calc(100vw - 32px));
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease;
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(10px);
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .footerPad{ height: 40vh; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="title">
+        <h1>JavaScript Pratik Sahası</h1>
+        <p>DOM, event, scroll, hesaplama, CSS değişkenleri, animasyon — hepsi tek sayfada.</p>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="pill" id="clockPill">
+			<span id="clockText">--:--:--</span>
+		</span>
+        <button class="btn" id="btnScrollTop" type="button">Yukarı</button>
+      </div>
+    </header>
+
+    <div class="stickyHint">
+      <div class="pill scrollBadge" id="scrollBadge">Scroll ile açılıp gizlenen alanlar aktif
+	  </div>
+    </div>
+
+    <div class="row">
+      <!-- Sol: Form + Hesaplama -->
+      <section class="card reveal" data-reveal>
+        <h2>1) Textbox / Checkbox / Hesaplama</h2>
+        <p class="muted">Amaç: input olayları, doğrulama, checkbox ile koşullu UI, hesaplama.</p>
+
+        <div class="grid2" style="margin-top: 10px;">
+          <div>
+            <label for="txtName">Ad Soyad (textbox)</label>
+            <input id="txtName" type="text" placeholder="Örn: Vedat Gümüşkuyu" />
+          </div>
+
+          <div>
+            <label for="txtNote">Not (textbox)</label>
+            <input id="txtNote" type="text" placeholder="Örn: Bugün pratik yapacağım" />
+          </div>
+
+          <div>
+            <label for="numA">Sayı A</label>
+            <input id="numA" type="number" value="12" />
+          </div>
+
+          <div>
+            <label for="numB">Sayı B</label>
+            <input id="numB" type="number" value="3" />
+          </div>
+
+          <div>
+            <label for="opSelect">İşlem</label>
+            <select id="opSelect">
+              <option value="add">Topla</option>
+              <option value="sub">Çıkar</option>
+              <option value="mul">Çarp</option>
+              <option value="div">Böl</option>
+            </select>
+          </div>
+
+          <div style="display:flex; gap:10px; align-items:flex-end;">
+            <button class="btn" id="btnCalc" type="button" style="width:100%;">Hesapla</button>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center; margin-top: 12px; flex-wrap: wrap;">
+          <label style="display:flex; gap:10px; align-items:center; margin:0;">
+            <input id="chkRound" type="checkbox" />
+            <span class="muted">Sonucu 2 ondalık basamağa yuvarla</span>
+          </label>
+
+          <label style="display:flex; gap:10px; align-items:center; margin:0;">
+            <input id="chkHighlightInvalid" type="checkbox" checked />
+            <span class="muted">Hatalı girişleri vurgula</span>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="pill" style="width:100%; justify-content:space-between;">
+          <span>Sonuç</span>
+          <strong id="resultText">—</strong>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="muted" id="livePreview">
+          (Canlı Önizleme) Ad Soyad: 
+		  <span id="liveName">—</span>
+		  | Not: 
+		  <span id="liveNote">—</span>
+        </div>
+      </section>
+
+      <!-- Sağ: Accordion -->
+      <aside class="card reveal" data-reveal>
+        <h2>2) DIV ile Akordeon Menü</h2>
+        <p class="muted">Amaç: dataset, class/attribute toggle, dinamik height hesaplama.</p>
+
+        <div class="accordion" id="accordion">
+		
+          <div class="acc-item" data-open="true">
+            <div class="acc-header" role="button" tabindex="0">
+              <strong>Bölüm 1: DOM Seçiciler</strong>
+              <span class="chev"> &#9660; ▾</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-content">
+                querySelector, querySelectorAll, closest, dataset, classList pratikleri.
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item" data-open="false">
+            <div class="acc-header" role="button" tabindex="0">
+              <strong>Bölüm 2: Event Mantığı</strong>
+              <span class="chev">▾</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-content">
+                click, input, change, keydown, event delegation ve preventDefault.
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item" data-open="false">
+            <div class="acc-header" role="button" tabindex="0">
+              <strong>Bölüm 3: Animasyon</strong>
+              <span class="chev">▾</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-content">
+                CSS keyframes, Web Animations API, requestAnimationFrame örnekleri.
+              </div>
+            </div>
+          </div>
+		  
+        </div>
+
+        <div class="divider"></div>
+		
+        <div style="display:flex; gap:10px; flex-wrap: wrap;">
+          <button class="btn" id="btnOpenAll" type="button">Tümünü Aç</button>
+          <button class="btn" id="btnCloseAll" type="button">Tümünü Kapat</button>
+        </div>
+		
+      </aside>
+    </div>
+
+    <div class="row">
+      <!-- CSS kontrol paneli -->
+      <section class="card reveal" data-reveal>
+        <h2>3) Tüm Sayfanın CSS Ayarları (Canlı)</h2>
+        <p class="muted">Amaç: CSS değişkenleri (CSS variables) + input ile güncelleme.</p>
+
+        <div class="grid2" style="margin-top: 10px;">
+          <div>
+            <label for="rangeRadius">Köşe Yuvarlaklığı: <span id="valRadius">14</span>px</label>
+            <input id="rangeRadius" type="range" min="0" max="50" value="14" />
+          </div>
+
+          <div>
+            <label for="rangeSpacing">Boşluk/Padding: <span id="valSpacing">12</span>px</label>
+            <input id="rangeSpacing" type="range" min="6" max="20" value="12" />
+          </div>
+
+          <div>
+            <label for="rangeFont">Yazı Boyutu: <span id="valFont">16</span>px</label>
+            <input id="rangeFont" type="range" min="14" max="20" value="16" />
+          </div>
+
+          <div>
+            <label for="accentSelect">Vurgu Rengi (Accent)</label>
+            <select id="accentSelect">
+              <option value="#8a7dff">Mor</option>
+              <option value="#44d1ff">Mavi</option>
+              <option value="#4cff9a">Yeşil</option>
+              <option value="#ffb347">Turuncu</option>
+              <option value="#ff5c9a">Pembe</option>
+            </select>
+          </div>
+		  
+        </div>
+
+        <div class="divider"></div>
+		
+        <button class="btn" id="btnResetTheme" type="button">Varsayılan Ayarlara Dön</button>
+		
+      </section>
+
+      <!-- Animasyonlar -->
+      <section class="card reveal" data-reveal>
+        <h2>4) Animasyon Örnekleri</h2>
+        <p class="muted">Amaç: CSS animasyonu + JS ile hareket (WAAPI + rAF).</p>
+
+        <div class="demoArea" style="margin-top: 10px;">
+          <div class="box pulse" title="CSS keyframes (pulse)">CSS</div>
+          <div class="box" id="waapiBox" title="Web Animations API">WAAPI</div>
+          <div class="box" id="rafBox" title="requestAnimationFrame">rAF</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="display:flex; gap:10px; flex-wrap: wrap;">
+          <button class="btn" id="btnWaapi" type="button">WAAPI ile Zıplat</button>
+          <button class="btn" id="btnRaf" type="button">rAF ile Sola-Sağa</button>
+          <button class="btn" id="btnStopAnim" type="button">Animasyonları Durdur</button>
+        </div>
+		
+      </section>
+	  
+    </div>
+
+    <!-- Scroll ile otomatik açılıp gizlenen içerikler -->
+    <section class="card reveal" data-reveal style="margin-top:14px;">
+      <h2>5) Scroll ile Otomatik Açılan / Gizlenen İçerikler</h2>
+      <p class="muted">
+        Bu alanlar  Görünen alan (viewport)’a girince otomatik görünür (reveal). Ayrıca aşağı kaydırınca bir “kutu” görünür.
+      </p>
+
+      <div class="divider"></div>
+
+      <div class="card reveal" data-reveal style="background: rgba(0,0,0,.18); box-shadow:none;">
+        <h2 style="margin:0 0 8px; font-size:15px;">İçerik Blok A</h2>
+        <p class="muted" style="margin:0;">IntersectionObserver ile görünür olunca class ekleniyor.</p>
+      </div>
+
+      <div style="height: 16px;"></div>
+
+      <div class="card reveal" data-reveal style="background: rgba(0,0,0,.18); box-shadow:none;">
+        <h2 style="margin:0 0 8px; font-size:15px;">İçerik Blok B</h2>
+        <p class="muted" style="margin:0;">Kaydırma olayı (Scroll event) ile yapışkan içerik kutusu (sticky badge) yönetimi.</p>
+      </div>
+
+      <div class="footerPad"></div>
+	  
+      <p class="muted">Sayfanın en altına yaklaştın. Yukarı çıkmak için “Yukarı” butonunu dene.</p>
+	  
+    </section>
+	
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
